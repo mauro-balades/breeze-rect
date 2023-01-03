@@ -19,9 +19,7 @@ lang = "rect"
 
 [config.rect-lang]
 type = "exec"
-compiler = "g++"
-sources = ["./src/**/*.cc"]
-include = "./include"
+sources = ["./src/**/*.rct"]
 ```
 
 and finally,

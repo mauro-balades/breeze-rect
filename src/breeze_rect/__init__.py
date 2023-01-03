@@ -31,9 +31,6 @@ def create_rect_folder(build_config):
 
 def link_objects(config):
 
-    logger.verbose("Linker flags: %s" % config["linker_flags"])
-    logger.verbose("Linking object files (%s) to '%s'" % (config["compiled_objects"], config['output']))
-
     command = []
 
     command.append(config["compiler"])
@@ -46,8 +43,6 @@ def link_objects(config):
     logger.info(f"Compiled rect source code ({config['output']})")
 
 def emit_library(config):
-
-    logger.verbose("Rect flags: %s" % config["flags"])
 
     command = []
 
@@ -107,6 +102,12 @@ def breeze_build(config):
     else:
         pass # TODO: error?
 
+    if len(build_config["source_files"]) == 0:
+        logger.info("Skiping build because no sources found!")
+        exit(0)
+
+    logger.verbose("Rect sources: %s" % str(build_config["source_files"]))
+    logger.verbose("Rect flags: %s" % build_config["flags"])
     if output_type == "exec":
         logger.verbose("Compiling executable...")
         build_config["output"] = rect_lang_config.get("output", "a.out")
